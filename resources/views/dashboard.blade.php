@@ -24,7 +24,7 @@
     <div class="row">
 
       <!-- Card: Total Proyek -->
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-3 col-12">
         <div class="small-box bg-info">
           <div class="inner">
             <h3>{{ $data['total_proyek'] ?? 0 }}</h3>
@@ -33,14 +33,14 @@
           <div class="icon">
             <i class="fas fa-building"></i>
           </div>
-          <a href="{{ route('progres.index') }}" class="small-box-footer">
+       <a href="{{ route('progress.pilih') }}" class="small-box-footer">
             Lihat Detail <i class="fas fa-arrow-circle-right"></i>
           </a>
         </div>
       </div>
 
       <!-- Card: Proyek Selesai -->
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-3 col-12">
         <div class="small-box bg-success">
           <div class="inner">
             <h3>{{ $data['proyek_selesai'] ?? 0 }}</h3>
@@ -49,14 +49,14 @@
           <div class="icon">
             <i class="fas fa-check-circle"></i>
           </div>
-          <a href="{{ route('progres.index') }}" class="small-box-footer">
+        <a href="{{ route('progress.pilih') }}" class="small-box-footer">
             Lihat Detail <i class="fas fa-arrow-circle-right"></i>
           </a>
         </div>
       </div>
 
       <!-- Card: Proyek Berjalan -->
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-3 col-12">
         <div class="small-box bg-warning">
           <div class="inner text-white">
             <h3>{{ $data['proyek_berjalan'] ?? 0 }}</h3>
@@ -65,12 +65,11 @@
           <div class="icon">
             <i class="fas fa-tasks"></i>
           </div>
-          <a href="{{ route('progres.index') }}" class="small-box-footer text-white">
+          <a href="{{ route('progress.pilih') }}" class="small-box-footer text-white">
             Lihat Detail <i class="fas fa-arrow-circle-right"></i>
           </a>
         </div>
       </div>
-
     </div>
 
     <!-- Card Sambutan -->
@@ -80,7 +79,7 @@
       </div>
       <div class="card-body">
         <p>
-          Sistem ini membantu kamu memantau progres proyek, mencatat laporan mingguan,
+          Sistem ini membantu kamu memantau progress proyek, mencatat laporan mingguan,
           serta mengawasi bahan bangunan dengan lebih efisien.
         </p>
         <p>

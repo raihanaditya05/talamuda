@@ -6,26 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('progres_proyek', function (Blueprint $table) {
-             $table->id();
-    $table->string('nama_proyek');
-    $table->text('deskripsi')->nullable();
-    $table->integer('persentase')->default(0);
-    $table->date('tanggal_mulai');
-    $table->date('tanggal_selesai')->nullable();
-    $table->string('foto')->nullable(); 
-    $table->timestamps();
+
+            // PRIMARY KEY SENDIRI
+            $table->bigIncrements('id_progresproyek');
+
+            // RELASI LOGIS KE PROYEK (TANPA FK DATABASE)
+            $table->unsignedBigInteger('id_proyek');
+
+            $table->text('deskripsi')->nullable();
+            $table->integer('persentase')->default(0);
+            $table->string('foto')->nullable();
+
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('progres_proyek');

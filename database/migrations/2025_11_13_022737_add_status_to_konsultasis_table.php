@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('progres_proyek', function (Blueprint $table) {
-            $table->string('foto')->nullable()->after('persentase');
+        Schema::table('konsultasis', function (Blueprint $table) {
+            $table->string('status')->default('Belum Dikirim');
         });
     }
 
     public function down(): void
     {
-        Schema::table('progres_proyek', function (Blueprint $table) {
-            $table->dropColumn('foto');
+        Schema::table('konsultasis', function (Blueprint $table) {
+            $table->dropColumn('status');
         });
     }
 };

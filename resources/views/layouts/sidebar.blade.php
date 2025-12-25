@@ -36,20 +36,29 @@
           <!-- Submenu Dashboard -->
           <ul class="nav nav-treeview">
             <!-- Statistik Proyek -->
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fas fa-chart-line nav-icon"></i>
-                <p>Statistik Proyek</p>
-              </a>
-            </li>
+<li class="nav-item">
+    <a href="{{ route('statistik.index') }}" class="nav-link">
+        <i class="nav-icon fas fa-chart-line"></i>
+        <p>Statistik Proyek</p>
+    </a>
+</li>
 
-            <!-- Progres Proyek -->
-            <li class="nav-item">
-              <a href="{{ route('progres.index') }}" class="nav-link">
-                <i class="fas fa-tasks nav-icon"></i>
-                <p>Progres Proyek</p>
-              </a>
-            </li>
+<li class="nav-item">
+    <a href="{{ route('proyek.index') }}" class="nav-link">
+        <i class="fas fa-building nav-icon"></i>
+        <p>Data Proyek</p>
+    </a>
+</li>
+
+
+<!-- Progres Proyek -->
+<li class="nav-item">
+    <a href="{{ route('progress.pilih') }}" class="nav-link">
+        <i class="fas fa-tasks nav-icon"></i>
+        <p>Progres Proyek</p>
+    </a>
+</li>
+
 
             <!-- Laporan Mingguan -->
             <li class="nav-item">
@@ -67,13 +76,7 @@
               </a>
             </li>
 
-            <!-- Konsultasi Aktif -->
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fab fa-whatsapp nav-icon"></i>
-                <p>Konsultasi Aktif</p>
-              </a>
-            </li>
+
           </ul>
         </li>
       </ul>

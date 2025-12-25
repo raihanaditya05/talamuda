@@ -3,52 +3,59 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Proyek;
 use App\Models\ProgresProyek;
+use Illuminate\Support\Facades\Storage;
 
 class ProgresProyekController extends Controller
 {
-    public function index()
+    public function pilihProyek()
     {
-        $progres = ProgresProyek::all();
-        return view('pproyek', compact('progres'));
+        $proyek = Proyek::all();
+        return view('progress.pilih', compact('proyek'));
+    }
+
+    public function index($id_proyek)
+    {
+        $proyek = Proyek::findOrFail($id_proyek);
+
+        $progres = ProgresProyek::where('id_proyek', $id_proyek)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('progress.pproyek', compact('proyek', 'progres'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama_proyek' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            'id_proyek'  => 'required|exists:proyek,id_proyek',
+            'deskripsi'  => 'nullable|string',
             'persentase' => 'required|integer|min:0|max:100',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'nullable|date',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = $request->all();
+        $data = $request->only(['id_proyek','deskripsi','persentase']);
 
-        // Simpan foto ke folder uploads/foto_proyek
         if ($request->hasFile('foto')) {
-            $fileName = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $request->file('foto')->move(public_path('uploads/foto_proyek'), $fileName);
-            $data['foto'] = $fileName;
+            $data['foto'] = $request->file('foto')->store('foto_proyek', 'public');
         }
 
         ProgresProyek::create($data);
 
-        return redirect()->route('progres.index')->with('success', 'Data proyek berhasil ditambahkan.');
+        return back()->with('success', 'Progress berhasil ditambahkan');
     }
 
     public function destroy($id)
     {
-        $proyek = ProgresProyek::findOrFail($id);
+        $progres = ProgresProyek::findOrFail($id);
 
-        // Hapus foto dari folder kalau ada
-        if ($proyek->foto && file_exists(public_path('uploads/foto_proyek/' . $proyek->foto))) {
-            unlink(public_path('uploads/foto_proyek/' . $proyek->foto));
+        if ($progres->foto && Storage::disk('public')->exists($progres->foto)) {
+            Storage::disk('public')->delete($progres->foto);
         }
 
-        $proyek->delete();
+        $progres->delete();
 
-        return redirect()->route('progres.index')->with('success', 'Data proyek berhasil dihapus.');
+        return back()->with('success', 'Progress berhasil dihapus');
     }
 }

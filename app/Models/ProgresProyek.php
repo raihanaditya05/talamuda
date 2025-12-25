@@ -2,22 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProgresProyek extends Model
 {
     use HasFactory;
 
-    protected $table = 'progres_proyek'; // nama tabel di database
+    protected $table = 'progres_proyek';
+    protected $primaryKey = 'id_progresproyek';
 
-   protected $fillable = [
-    'nama_proyek',
-    'deskripsi',
-    'persentase',
-    'tanggal_mulai',
-    'tanggal_selesai',
-    'foto',
-];
+    protected $fillable = [
+        'id_proyek',
+        'deskripsi',
+        'persentase',
+        'foto',
+    ];
 
+    public function proyek()
+    {
+        return $this->belongsTo(Proyek::class, 'id_proyek', 'id_proyek');
+    }
 }
